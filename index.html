@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Web-Calculator</title>
+    <link href="./vendor/css/bootstrap.css" rel="stylesheet">
+    <link href="./vendor/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        
+        .calc-btn{
+            width: 60px;
+            height: 60px;
+        }
+        .calc-display{
+            background-color: rgb(166, 165, 165);
+            color: white;
+            height: 100px;
+            width: 310px;
+            border-radius: 8px;
+        }
+        .inputString{
+            margin-top: 5px;
+            height: 20px;
+            display: block;
+            font-size: 20px;
+        }
+        .expressionString{
+            margin-top: 5px;
+            height: 20px;
+            display: block;
+            font-size: 20px;
+        }
+        .valueString{
+            margin-top: 5px;
+            height: 20px;
+            display: block;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container p-5">
+        <div class="d-flex justify-content-center">
+            <div class="col-sm-12 col-md-4 col-lg-4">
+                <div class="card">
+                    <div class="d-flex justify-content-center align-items-center p-3">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 calc-display">
+                                <div id="number_div" class="inputString">0</div>
+                                <div id="expression" class="expressionString"></div>
+                                <div id="value_div" class="valueString"></div>
+                            </div>
+                            <input type="hidden" id="savedExpression">
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center p-3">
+                        <div class="row">
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <button type="button" class="btn btn-light calc-btn" data-event_key="NumLock"><small>Num Lock</small></button>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <button type="button" class="btn btn-light calc-btn" data-event_key="Delete">CE</button>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <button type="button" class="btn btn-light calc-btn" data-event_key="Backspace">Del</button>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <button type="button" class="btn btn-light calc-btn" data-event_key="/">/</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-center align-items-center p-3">
+                        <div class="row">
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <button type="button" class="btn btn-light calc-btn" data-event_key="7">7</button>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <button type="button" class="btn btn-light calc-btn" data-event_key="8">8</button>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <button type="button" class="btn btn-light calc-btn" data-event_key="9">9</button>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <button type="button" class="btn btn-light calc-btn" data-event_key="*">X</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-center align-items-center p-3">
+                        <div class="row">
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <button type="button" class="btn btn-light calc-btn" data-event_key="4">4</button>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <button type="button" class="btn btn-light calc-btn" data-event_key="5">5</button>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <button type="button" class="btn btn-light calc-btn" data-event_key="6">6</button>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <button type="button" class="btn btn-light calc-btn" data-event_key="-">-</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-center align-items-center p-3">
+                        <div class="row">
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <button type="button" class="btn btn-light calc-btn" data-event_key="1">1</button>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <button type="button" class="btn btn-light calc-btn" data-event_key="2">2</button>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <button type="button" class="btn btn-light calc-btn" data-event_key="3">3</button>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <button type="button" class="btn btn-light calc-btn" data-event_key="+">+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-center align-items-center p-3">
+                        <div class="row">
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <button type="button" class="btn btn-light calc-btn" data-event_key="0" style="width: 150px;">0</button>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <button type="button" class="btn btn-light calc-btn" data-event_key=".">.</button>
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                <button type="button" class="btn btn-light calc-btn" data-event_key="=">=</button>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    <script src="./vendor/jquery/jquery.min.js" ></script>
+    <script src="./vendor/popper/popper.js"></script>
+    <script src="./vendor/js/bootstrap.js"></script>
+
+    <script>
+        $(document).on('keypress', function(e) {
+            $('button[data-event_key="' + e.key + '"]').addClass('active');
+            
+            if ((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105)) {
+                appendNumber(e.key);
+            } else {
+                if (e.key == '+' || e.key == '-' || e.key == '*' || e.key == '/') {
+                    generateExpression(e.key);
+                } else if (e.key == '=' || e.key == 'Enter') {
+                    evaluateExpression(); // Call evaluateExpression on Enter key
+                } else if (e.key == 'Delete') {
+                    clearCalc();
+                } else if (e.key == 'Backspace') {
+                    handleBackspace()
+                } else if (e.key == '.') {
+                    appendNumber('.'); 
+                }
+            }
+            console.log(e.key);
+        });
+    
+        $(document).on('keyup', function(e) {
+            $('button[data-event_key="' + e.key + '"]').removeClass('active');
+            console.log(e.key);
+        });
+    
+        $('.calc-btn').on('click', function(e) {
+            var key = $(this).data('event_key');
+            
+            if (key !== '+' && key !== '-' && key !== '.' && key !== '/' && key !== '*' && key !== '=' && key !== 'Delete' && key !== 'NumLock') {
+                appendNumber(key);
+            } else {
+                if (key == '+' || key == '-' || key == '*' || key == '/') {
+                    generateExpression(key);
+                } else if (key == '=') {
+                    evaluateExpression(); // Call evaluateExpression on '=' button click
+                } else if (key == 'Delete') {
+                    clearCalc();          // call clearCalc on pressing ce button
+                } else if (key == 'Backspace') {
+                    handleBackspace();    //call handelBackspace on pressing del button
+                } else if (key == '.') {
+                    appendNumber('.');   //to take decimal value
+                }
+            }
+            console.log(key);
+        });
+    
+        //append opperation adding new value
+        function appendNumber(number) {
+            var existingNumber = $("#number_div").html();
+            var currentString = number;
+            var outputString = '';
+    
+            if (existingNumber) {
+                if (existingNumber == '0') {
+                    outputString = currentString;
+                } else {
+                    outputString = existingNumber + currentString;
+                }
+            } else {
+                outputString = currentString;
+            }
+    
+            $("#number_div").html(outputString);
+        }
+    
+        //operation generator
+        function generateExpression(operator) {
+            var existingNumber = $("#number_div").html();
+            var savedExpression = $("#savedExpression").val();
+            var expression = '';
+    
+            if (savedExpression) {
+                expression = savedExpression + existingNumber + operator;
+            } else {
+                expression = existingNumber + operator;
+            }
+    
+            $("#number_div").html("");
+            $("#savedExpression").val(expression);
+            $("#expression").html(expression);
+        }
+    
+        // handel equals to button and enter key in the keyboard
+        function evaluateExpression() {
+            var expression = $("#savedExpression").val();
+            var existingNumber = $("#number_div").html();
+    
+            if (existingNumber) {
+                expression += existingNumber;
+            }
+    
+            try {
+                var result = eval(expression); 
+                $("#number_div").html(result);
+                $("#value_div").html(result);
+                $("#savedExpression").val("");
+                $("#expression").html(expression + " = " + result);
+            } catch (error) {
+                console.error("Error evaluating expression:", error);
+                $("#number_div").html("Error");
+            }
+        }
+    
+        //handel ce button
+        function clearCalc() {
+            $("#number_div").html("0"); 
+            $("#savedExpression").val("");
+            $("#expression").html("");
+            $("#value_div").html("");
+        }
+    
+        // handel backspace
+        function handleBackspace() {
+            var existingNumber = $("#number_div").text();
+
+            if (existingNumber.length > 0 && existingNumber !== '0') { 
+                if (existingNumber.length > 1) {
+                    existingNumber = existingNumber.slice(0, -1);
+                } else {
+                    existingNumber = '0';
+                }
+            }
+            $("#number_div").text(existingNumber);
+        }
+        $('.calc-btn[data-event_key="Backspace"]').on('click', handleBackspace);
+    </script>
+</body>
+</html>
